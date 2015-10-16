@@ -1,0 +1,31 @@
+Given(/^$/) do
+  url = 'http://cep.correiocontrol.com.br/02720100.json'
+end
+
+When(/^$/) do
+  response = HTTParty.get(url)
+end
+
+Then(/^$/) do
+  
+end
+
+And(/^$/) do
+  response.code
+end
+
+Then(/^$/) do
+  parsed_response = JSON.parse(response.body)
+end
+
+And(/^$/) do
+  [{
+    neighbourhood: result["bairro"] || "",
+    street:        result["logradouro"].strip,
+    zip code:      result["cep"] || "",
+    state:         result["uf"] || "",
+    locality:      result["localidade"] || ""
+  }]
+end
+
+
